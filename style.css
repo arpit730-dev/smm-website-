@@ -9,6 +9,51 @@
   --warning: #fdcb6e;
   --info: #0984e3;
 }
+/* Dark Mode Variables */
+:root {
+  --primary-light: #6c5ce7;
+  --primary-dark: #a29bfe;
+  --bg-light: #f5f6fa;
+  --bg-dark: #1a1a2e;
+  --text-light: #2d3436;
+  --text-dark: #ffffff;
+}
+
+/* Dark Mode Classes */
+body.dark-mode {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+.dark-mode .service-card,
+.dark-mode .price-calculator {
+  background: #16213e;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Theme Toggle Button */
+.theme-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: var(--primary-light);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Service Icons with Brand Colors */
+.fa-instagram { color: #E1306C; } /* Instagram gradient would need SVG */
+.fa-youtube { color: #FF0000; }
+.fa-x-twitter { color: #000000; } /* New X logo */
+.fa-telegram { color: #0088cc; }
 
 * {
   margin: 0;
