@@ -47,11 +47,53 @@ body.dark-mode {
 }
 
 /* Service Icons with Brand Colors */
-.fa-instagram { color: #E1306C; } /* Instagram gradient would need SVG */
-.fa-youtube { color: #FF0000; }
-.fa-x-twitter { color: #000000; } /* New X logo */
-.fa-telegram { color: #0088cc; }
+/* Service Icons Styling */
+.service-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.service-icon svg,
+.service-icon i {
+    width: 100%;
+    height: 100%;
+}
+
+/* Instagram Gradient Icon */
+.instagram-card .service-icon svg {
+    fill: url(#instagram-gradient);
+}
+
+/* YouTube Red Icon */
+.youtube-card .service-icon i {
+    color: #FF0000;
+    font-size: 50px;
+}
+
+/* Twitter/X Black Icon */
+.twitter-card .service-icon svg {
+    fill: #000000;
+}
+
+/* Telegram Blue Icon */
+.telegram-card .service-icon i {
+    color: #0088cc;
+    font-size: 50px;
+}
+
+/* Dark Mode Adjustments */
+body.dark-mode .service-card {
+    background: #16213e;
+    border: 1px solid #2a3a5e;
+}
+
+body.dark-mode .twitter-card .service-icon svg {
+    fill: #ffffff;
+}
 * {
   margin: 0;
   padding: 0;
