@@ -3,211 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Media Services - Followers, Likes, Views</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Add Font Awesome for icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-<!-- Dark/Light Mode Toggle Button -->
-<button id="themeToggle" class="theme-btn">
-  <i class="fas fa-moon"></i> <!-- Default: Dark mode icon -->
-</button>
+    <title>Color Prediction Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS will go here */
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <header>
-        <div class="container">
-            <div class="logo">SMM<span>Pro</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#testimonials">Reviews</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Boost Your Social Media Presence</h1>
-                <p>High-quality followers, likes, and views at the best prices</p>
-                <a href="#pricing" class="btn">Order Now</a>
-            </div>
-            <div class="hero-image">
-                <img src="assets/images/social-media.png" alt="Social Media">
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
     <div class="container">
-        <h2>Our Services</h2>
-        <div class="services-grid">
-            <!-- Instagram Card -->
-            <div class="service-card instagram-card">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path fill="url(#instagram-gradient)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"/>
-                        <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#fdf497" />
-                            <stop offset="5%" stop-color="#fdf497" />
-                            <stop offset="45%" stop-color="#fd5949" />
-                            <stop offset="60%" stop-color="#d6249f" />
-                            <stop offset="90%" stop-color="#285AEB" />
-                        </linearGradient>
-                    </svg>
-                </div>
-                <h3>Instagram</h3>
-                <p>Followers, Likes, Views, Comments</p>
+        <header class="app-header">
+            <h1>Color Predictor</h1>
+            <p>Predict the next result based on previous numbers</p>
+        </header>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <label for="lastPeriod">Last Period Number (last 2 digits)</label>
+                <input type="number" id="lastPeriod" min="0" max="99" placeholder="e.g., 45">
             </div>
-
-            <!-- YouTube Card -->
-            <div class="service-card youtube-card">
-                <div class="service-icon">
-                    <i class="fab fa-youtube"></i>
-                </div>
-                <h3>YouTube</h3>
-                <p>Views, Subscribers, Likes</p>
+            
+            <div class="input-group">
+                <label for="upcomingPeriod">Upcoming Period Number (last 2 digits)</label>
+                <input type="number" id="upcomingPeriod" min="0" max="99" placeholder="e.g., 78">
             </div>
-
-            <!-- Twitter/X Card -->
-            <div class="service-card twitter-card">
-                <div class="service-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
-                    </svg>
+            
+            <div class="input-group">
+                <label>Last Period Result</label>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="lastResult" value="big" checked>
+                        <span>BIG</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="lastResult" value="small">
+                        <span>SMALL</span>
+                    </label>
                 </div>
-                <h3>Twitter/X</h3>
-                <p>Followers, Retweets, Likes</p>
             </div>
-
-            <!-- Telegram Card -->
-            <div class="service-card telegram-card">
-                <div class="service-icon">
-                    <i class="fab fa-telegram"></i>
+            
+            <button id="predictBtn" class="predict-button">PREDICT NOW</button>
+        </div>
+        
+        <div class="result-section hidden">
+            <h2>Prediction Result</h2>
+            <div class="result-display">
+                <div id="bigSmallResult" class="result-box">
+                    <span class="result-label">RESULT</span>
+                    <span id="resultText" class="result-value">-</span>
                 </div>
-                <h3>Telegram</h3>
-                <p>Members, Views, Reactions</p>
+                <div id="colorResult" class="result-box">
+                    <span class="result-label">COLOR</span>
+                    <span id="colorText" class="result-value">-</span>
+                </div>
             </div>
+            <div class="calculation">
+                <p>Calculation: (<span id="upcomingDisplay">--</span> - <span id="lastDisplay">--</span>) - <span id="lastResultDisplay">--</span> = <span id="finalDiff">--</span></p>
+            </div>
+            <button id="resetBtn" class="reset-button">TRY AGAIN</button>
         </div>
     </div>
-</section>
-
-    <!-- Pricing Section -->
-    <section id="pricing" class="pricing">
-        <div class="container">
-            <h2>Our Pricing</h2>
-            <div class="price-calculator">
-                <h3>Instagram Followers Calculator</h3>
-                <div class="calculator">
-                    <input type="range" id="followersRange" min="100" max="10000" step="100" value="1000">
-                    <div class="range-value">
-                        <span id="followersValue">1000</span> Followers
-                    </div>
-                    <div class="price-result">
-                        Total Price: ₹<span id="totalPrice">500</span>
-                    </div>
-                    <button class="btn">Place Order</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2>What Our Clients Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"Got 5K real followers in 24 hours. Amazing service!"</p>
-                    <div class="user">
-                        <img src="assets/images/user1.jpg" alt="User">
-                        <span>Rahul, YouTuber</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p>"Affordable and high quality. Will order again!"</p>
-                    <div class="user">
-                        <img src="assets/images/user2.jpg" alt="User">
-                        <span>Priya, Instagram Influencer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <form name="contact" method="POST" data-netlify="true">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>SMMPro</h3>
-                    <p>The most trusted platform for social media growth</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <ul>
-                        <li><i class="fas fa-envelope"></i> contact@smmpro.com</li>
-                        <li><i class="fab fa-whatsapp"></i> +91 XXXXX XXXXX</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 SMMPro. All Rights Reserved</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+    
+    <script>
+        // JavaScript will go here
+    </script>
 </body>
-                                                 </html>
+</html>
