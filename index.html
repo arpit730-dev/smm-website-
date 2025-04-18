@@ -6,6 +6,72 @@
     <title>Color Prediction Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        .theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80px;
+  height: 36px;
+  background: linear-gradient(145deg, #2d3748, #1a202c);
+  border-radius: 50px;
+  padding: 5px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.light-mode .toggle-label {
+  background: linear-gradient(145deg, #e2e8f0, #cbd5e0);
+}
+
+.toggle-ball {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(145deg, #f6e05e, #f59e0b);
+  border-radius: 50%;
+  left: 5px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-ball {
+  transform: translateX(42px);
+  background: linear-gradient(145deg, #a0aec0, #718096);
+}
+
+.sun-icon, .moon-icon {
+  font-size: 18px;
+  z-index: 1;
+}
+
+.sun-icon {
+  color: #f6ad55;
+}
+
+.moon-icon {
+  color: #a0aec0;
+}
+
+.light-mode .sun-icon {
+  color: #dd6b20;
+}
+
+.light-mode .moon-icon {
+  color: #4a5568;
+}
         * {
             margin: 0;
             padding: 0;
@@ -188,6 +254,14 @@
     </style>
 </head>
 <body>
+    <div class="theme-toggle">
+  <input type="checkbox" id="theme-toggle" class="toggle-checkbox">
+  <label for="theme-toggle" class="toggle-label">
+    <span class="sun-icon">☀️</span>
+    <span class="moon-icon">🌙</span>
+    <div class="toggle-ball"></div>
+  </label>
+    </div>
     <div class="container">
         <header class="app-header">
             <h1>Color Predictor</h1>
@@ -230,6 +304,24 @@
     </div>
     
     <script>
+        const themeToggle = document.getElementById('theme-toggle');
+const body = document.body;
+
+// Check for saved user preference
+if (localStorage.getItem('theme') === 'light') {
+  body.classList.add('light-mode');
+  themeToggle.checked = true;
+}
+
+themeToggle.addEventListener('change', function() {
+  if (this.checked) {
+    body.classList.add('light-mode');
+    localStorage.setItem('theme', 'light');
+  } else {
+    body.classList.remove('light-mode');
+    localStorage.setItem('theme', 'dark');
+  }
+});
         document.addEventListener('DOMContentLoaded', function() {
             const predictBtn = document.getElementById('predictBtn');
             const resetBtn = document.getElementById('resetBtn');
