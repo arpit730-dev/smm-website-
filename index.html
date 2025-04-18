@@ -12,7 +12,47 @@
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
+body.light {
+    background: linear-gradient(135deg, #f1f1f1, #e0e0e0);
+    color: #111;
+}
 
+body.light .container {
+    background: rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.light .app-header h1 {
+    background: linear-gradient(to right, #ff512f, #dd2476);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+body.light .result-box {
+    background: rgba(0, 0, 0, 0.05);
+    color: #111;
+}
+
+body.light .predict-button {
+    background: linear-gradient(to right, #ff512f, #dd2476);
+    box-shadow: 0 4px 15px rgba(255, 81, 47, 0.3);
+    color: white;
+}
+
+body.light .predict-button:hover {
+    box-shadow: 0 6px 20px rgba(255, 81, 47, 0.4);
+}
+
+body.light .reset-button {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+}
+
+body.light input {
+    background: rgba(0, 0, 0, 0.05);
+    color: #000;
+}
         body {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #fff;
@@ -188,6 +228,11 @@
     </style>
 </head>
 <body>
+    <div style="text-align:right; margin-bottom:10px;">
+    <label style="font-size: 0.9rem;">
+        <input type="checkbox" id="themeToggle" style="margin-right: 5px;"> Light Mode
+    </label>
+    </div>
     <div class="container">
         <header class="app-header">
             <h1>Color Predictor</h1>
@@ -230,6 +275,10 @@
     </div>
     
     <script>
+        const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('change', function() {
+    document.body.classList.toggle('light');
+});
         document.addEventListener('DOMContentLoaded', function() {
             const predictBtn = document.getElementById('predictBtn');
             const resetBtn = document.getElementById('resetBtn');
