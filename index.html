@@ -228,11 +228,6 @@ body.light input {
     </style>
 </head>
 <body>
-    <div style="text-align:right; margin-bottom:10px;">
-    <label style="font-size: 0.9rem;">
-        <input type="checkbox" id="themeToggle" style="margin-right: 5px;"> Light Mode
-    </label>
-    </div>
     <div class="container">
         <header class="app-header">
             <h1>Color Predictor</h1>
@@ -275,10 +270,6 @@ body.light input {
     </div>
     
     <script>
-        const themeToggle = document.getElementById('themeToggle');
-themeToggle.addEventListener('change', function() {
-    document.body.classList.toggle('light');
-});
         document.addEventListener('DOMContentLoaded', function() {
             const predictBtn = document.getElementById('predictBtn');
             const resetBtn = document.getElementById('resetBtn');
