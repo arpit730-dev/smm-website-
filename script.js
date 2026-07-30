@@ -145,25 +145,6 @@ lockBtn.onclick = ()=>{
 };
 
 
-
-// Iframe Error Message
-
-const frame = card.querySelector(".video-frame");
-
-frame.onload = ()=>{
-
-    console.log("Loaded");
-
-};
-
-frame.onerror = ()=>{
-
-    alert("Website iframe me open nahi ho rahi");
-
-
-    };
-
-
 }
 
 
