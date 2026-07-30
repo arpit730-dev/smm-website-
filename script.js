@@ -127,4 +127,72 @@ function addScreen(savedURL = "") {
 
 addBtn.onclick = ()=>{
 
-    add
+    addScreen();
+
+};
+
+
+
+// Clear All
+
+clearBtn.onclick = ()=>{
+
+    container.innerHTML="";
+    screenCount=0;
+
+    localStorage.removeItem("screens");
+
+};
+
+
+
+
+// Save URLs
+
+function saveData(){
+
+    let data=[];
+
+    document.querySelectorAll(".video-url")
+    .forEach(input=>{
+
+        data.push(input.value);
+
+    });
+
+
+    localStorage.setItem(
+        "screens",
+        JSON.stringify(data)
+    );
+
+}
+
+
+
+// Load Saved Screens
+
+window.onload = ()=>{
+
+
+    let saved =
+    JSON.parse(localStorage.getItem("screens"));
+
+
+    if(saved && saved.length){
+
+        saved.forEach(url=>{
+
+            addScreen(url);
+
+        });
+
+    }
+    else{
+
+        addScreen();
+
+    }
+
+
+};
