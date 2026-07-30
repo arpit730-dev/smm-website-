@@ -115,6 +115,51 @@ function addScreen(savedURL = "") {
         card.remove();
 
         saveData();
+// Lock Screen
+
+const lockBtn = card.querySelector(".lock-btn");
+
+let locked = false;
+
+lockBtn.onclick = ()=>{
+
+    locked = !locked;
+
+    if(locked){
+
+        lockBtn.innerHTML = "🔒";
+
+        card.querySelector(".remove-btn").disabled = true;
+        card.querySelector(".video-url").disabled = true;
+
+    }
+    else{
+
+        lockBtn.innerHTML = "🔓";
+
+        card.querySelector(".remove-btn").disabled = false;
+        card.querySelector(".video-url").disabled = false;
+
+    }
+
+};
+
+
+
+// Iframe Error Message
+
+const frame = card.querySelector(".video-frame");
+
+frame.onload = ()=>{
+
+    console.log("Loaded");
+
+};
+
+frame.onerror = ()=>{
+
+    alert("Website iframe me open nahi ho rahi");
+
 
     };
 
