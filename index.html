@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube MultiScreen - Shorts Fixed</title>
+    <style>
+        * { box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { margin: 0; background: #111; color: white; }
+        .topbar { padding: 15px; background: #1c1c1c; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; flex-wrap: wrap; gap: 10px; }
+        .topbar h1 { margin: 0; font-size: 22px; }
+        .buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+        button { cursor: pointer; border: none; padding: 8px 12px; border-radius: 6px; background: #333; color: white; transition: 0.2s; }
+        button:hover { background: #555; }
+        #screenContainer { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 15px; padding: 15px; }
+        .screen-card { background: #1b1b1b; border-radius: 10px; padding: 12px; }
+        .screen-header { display: flex; justify-content: space-between; align-items: center; }
+        .screen-header h3 { margin: 5px 0; }
+        .url-box { display: flex; gap: 8px; margin: 10px 0; }
+        .video-url { flex: 1; padding: 10px; border-radius: 5px; border: none; background: #2a2a2a; color: white; }
+        .video-url:focus { outline: 2px solid #4CAF50; background: #333; }
+        .player-box { width: 100%; height: 300px; background: black; position: relative; border-radius: 5px; overflow: hidden; }
+        .video-frame { width: 100%; height: 100%; border: 0; }
+        .screen-actions { margin-top: 10px; display: flex; justify-content: space-between; gap: 10px; }
+        .screen-actions button { flex: 1; }
+        .remove-btn { background: #dc3545; }
+        .remove-btn:hover { background: #c82333; }
+        .fullscreen-btn { background: #17a2b8; }
+        .fullscreen-btn:hover { background: #138496; }
+        .load-btn { background: #28a745; }
+        .load-btn:hover { background: #218838; }
+        .error-msg { color: #ff6b6b; text-align: center; padding: 20px; display: none; }
+        .error-msg.show { display: block; }
+        @media(max-width:600px) { .topbar { flex-direction: column; align-items: stretch; } .buttons { justify-content: center; } #screenContainer { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<header class="topbar">
+    <h1>🎬 YouTube MultiScreen</h1>
+    <div class="buttons">
+        <button id="addScreen">➕ Add Screen</button>
+        <button id="clearAll">🗑 Clear All</button>
+    </div>
+</header>
+
+<main id="screenContainer"></main>
+
+<script>
+const container = document.getElementById("screenContainer");
+const addBtn = document.getElementById("addScreen");
+const clearBtn = document.getElementById("clearAll");
+
+let count = 0;
+const max = 50;
+
+// Improved YouTube ID extractor - handles Shorts, si= parameter, etc.
+function getYouTubeId(url) {
+    // Remove any tracking parameters like ?si=...
+    let cleanUrl = url.split('?')[0];
+    
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/)([^&\s?#]+)/,
+        /youtube\.com\/shorts\/([^&\s?#]+)/,
+        /youtube\.com\/live\/([^&\s?#]+)/
+    ];
+    
+    for (let pattern of patterns) {
+        let match = cleanUrl.match(pattern);
+        if (match) {
+            return match[1];
+        }
+    }
+    return null;
+}
+
+function addScreen() {
+    if (count >= max) {
+        alert("❌ Maximum 50 screens allowed!");
+        return;
+    }
+    count++;
+
+    let card = document.createElement("div");
+    card.className = "screen-card";
+
+    card.innerHTML = `
+        <div class="screen-header">
+            <h3>📺 Screen #${count}</h3>
+            <button class="remove-btn" style="background:#dc3545;">✖ Remove</button>
+        </div>
+
+        <div class="url-box">
+            <input class="video-url" placeholder="Paste YouTube URL here..." style="background:#2a2a2a;color:white;padding:10px;border-radius:5px;border:none;flex:1;">
+            <button class="load-btn" style="background:#28a745;padding:10px 15px;">▶ Load</button>
+        </div>
+
+        <div class="player-box">
+            <iframe class="video-frame" src="" allowfullscreen></iframe>
+            <div class="error-msg">❌ Video unavailable or restricted</div>
+        </div>
+
+        <div class="screen-actions">
+            <button class="fullscreen-btn" style="background:#17a2b8;">⛶ Fullscreen</button>
+        </div>
+    `;
+
+    container.appendChild(card);
+
+    let input = card.querySelector(".video-url");
+    let load = card.querySelector(".load-btn");
+    let frame = card.querySelector(".video-frame");
+    let errorMsg = card.querySelector(".error-msg");
+
+    // Pre-fill with your URL for testing
+    input.value = "https://youtube.com/shorts/cvHluouPSTU?si=iSZyHRO2kH7WsjY_";
+
+    function loadVideo() {
+        let url = input.value.trim();
+
+        if (!url) {
+            alert("⚠️ Please paste a YouTube URL!");
+            return;
+        }
+
+        // Get video ID
+        let videoId = getYouTubeId(url);
+        
+        if (!videoId) {
+            alert("❌ Invalid YouTube URL! Please paste a valid YouTube link.");
+            return;
+        }
+
+        // Create embed URL - clean and simple
+        let embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0`;
+        
+        frame.src = embedUrl;
+        errorMsg.classList.remove("show");
+
+        // Check if video loads
+        setTimeout(() => {
+            try {
+                let doc = frame.contentWindow.document;
+                errorMsg.classList.remove("show");
+            } catch (e) {
+                errorMsg.classList.add("show");
+            }
+        }, 3000);
+    }
+
+    load.onclick = loadVideo;
+
+    input.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            loadVideo();
+        }
+    });
+
+    // Fullscreen
+    card.querySelector(".fullscreen-btn").onclick = function() {
+        let playerBox = card.querySelector(".player-box");
+        if (playerBox.requestFullscreen) {
+            playerBox.requestFullscreen();
+        } else if (playerBox.webkitRequestFullscreen) {
+            playerBox.webkitRequestFullscreen();
+        } else if (playerBox.msRequestFullscreen) {
+            playerBox.msRequestFullscreen();
+        }
+    };
+
+    // Remove
+    card.querySelector(".remove-btn").onclick = function() {
+        card.remove();
+        count--;
+    };
+
+    // Auto-load
+    loadVideo();
+}
+
+addBtn.onclick = addScreen;
+
+clearBtn.onclick = function() {
+    if (confirm("Remove all screens?")) {
+        container.innerHTML = "";
+        count = 0;
+    }
+};
+
+// Add first screen
+addScreen();
+</script>
+
+</body>
+</html>
